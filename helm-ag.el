@@ -322,7 +322,7 @@ Default behaviour shows finish and result in mode-line."
           (if (zerop (length (buffer-string)))
               (error "No ag output: '%s'" helm-ag--last-query)
             (unless (helm-ag--command-succeeded-p ret)
-              (unless (executable-find (car cmds))
+              (unless (executable-find (car cmds) (file-remote-p default-directory))
                 (error "'%s' is not installed" (car cmds)))
               (error "Failed: '%s'" helm-ag--last-query))))
         (when helm-ag--buffer-search
